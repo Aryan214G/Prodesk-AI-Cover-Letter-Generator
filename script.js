@@ -37,6 +37,7 @@ function generateCoverLetter() {
         `;
 
         coverLetter.value = letter;
+        autoReizeTextArea();
 }
 
 
@@ -55,3 +56,11 @@ copyBtn.addEventListener("click", () => {
 
     }, 2000);
 });
+
+
+function autoReizeTextArea() {
+    
+    coverLetter.style.height = "auto";
+
+    coverLetter.style.height = coverLetter.scrollHeight + "px";
+}
