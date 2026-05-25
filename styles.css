@@ -1,3 +1,77 @@
 body {
+    margin: 0;
     font-family: "Inter", sans-serif;
+    
+}
+
+main {
+
+    max-width: 700px;
+
+    margin: 40px auto;
+
+    padding: 20px;
+}
+
+.form-section {
+
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.input-label-pair {
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 16px;
+    
+}
+
+input {
+
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    outline: none;
+    border: 1px solid #ccc;
+}
+
+textarea {
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 16px;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    resize: none;
+}
+
+button {
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+}
+
+
+/* =========== output area ================ */
+
+.output-section {
+    display: flex;
+    flex-direction: column;
+}
+
+#cover-letter-output {
+
+    width: 100%;
+
+    resize: none;
+
+    overflow: hidden;
+
+    min-height: 120px;
+    
 }
