@@ -38,3 +38,20 @@ function generateCoverLetter() {
 
         coverLetter.value = letter;
 }
+
+
+copyBtn.addEventListener("click", () => {
+
+    navigator.clipboard.writeText(
+        coverLetter.value
+    );
+
+    copyBtn.textContent = "Copied!";
+
+    setTimeout(() => {
+
+        copyBtn.textContent =
+            "Copy to Clipboard";
+
+    }, 2000);
+});
