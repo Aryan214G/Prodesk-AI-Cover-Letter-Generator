@@ -1,5 +1,5 @@
 import "./style.css";
-
+import.meta.env.VITE_GEMINI_API_KEY
 
 // ________ Form section _________________
 
