@@ -1,5 +1,20 @@
 import "./style.css";
-import.meta.env.VITE_GEMINI_API_KEY
+import { GoogleGenerativeAI }
+from "@google/generative-ai";
+
+// _____________Gemini________________________
+
+const genAI =
+    new GoogleGenerativeAI(
+        import.meta.env.VITE_GEMINI_API_KEY
+    );
+
+    const model =
+    genAI.getGenerativeModel({
+        model: "gemini-2.5-flash",
+    });
+
+
 
 // ________ Form section _________________
 
@@ -19,28 +34,71 @@ generateBtn.addEventListener("click", () => {
     generateCoverLetter();
 })
 
-function generateCoverLetter() {
+async function generateCoverLetter() {
+
+    console.log(import.meta.env.VITE_GEMINI_API_KEY);
 
     const company = targetCompanyField.value;
     const name = nameField.value;
     const role = jobField.value;
     const skills = skillsArea.value;
     
-    const letter = `
-        Dear Hiring Manager at ${company},
+        if (
+        !name ||
+        !role ||
+        !company ||
+        !skills
+    ) {
 
-        My name is ${name} and I am excited to apply for the ${role} role.
+        alert("Please fill all fields");
 
-        My key skills include ${skills}.
+        return;
+    }
 
-        Thank you for your consideration.
+    const prompt = `
+    You are a professional cover letter writer.
 
-        Sincerely,
-        ${name}
-        `;
+    Write a complete cover letter using the information below.
 
-        coverLetter.value = letter;
-        autoReizeTextArea();
+    Candidate Name: ${name}
+    Job Role: ${role}
+    Target Company: ${company}
+    Skills: ${skills}
+
+    Requirements:
+    - Return ONLY the cover letter.
+    - Do NOT include explanations, notes, placeholders, instructions, or bullet points.
+    - Do NOT ask the user to fill in missing information.
+    - Assume the provided information is correct.
+    - Use a professional tone.
+    - Maximum 300 words.
+    `;
+
+      try {
+        generateBtn.textContent = "Generating...";
+      
+        const result = await model.generateContent(prompt);
+      
+        const response = await result.response;
+      
+        const text = await response.text();
+      
+        generateBtn.textContent = "Generate Cover Letter";
+      
+        coverLetter.value = text;
+      } catch (error) {
+
+        console.error(error);
+        
+        alert(
+            "Failed to generate cover letter"
+        );
+
+        generateBtn.textContent = "Generate Cover Letter";
+      }
+
+
+        autoResizeTextArea();
 }
 
 
@@ -61,7 +119,7 @@ copyBtn.addEventListener("click", () => {
 });
 
 
-function autoReizeTextArea() {
+function autoResizeTextArea() {
     
     coverLetter.style.height = "auto";
 
